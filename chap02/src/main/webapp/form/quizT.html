@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>QuizT</title>
+</head>
+<body>
+	<!-- 연습문제 풀이! -->
+	<h3># 에버랜드 입장권 구매 문제</h3>
+	
+	<ul>
+		<li>현제 페이지에서 구매 수량을 정한 후 구매하기를 누르면</li>
+		<li>서블릿에서 구매 현황과 티켓의 총 가격을 콘솔에 출력해보기</li>
+		<li>
+			구매하기를 누른 시간에 따라 다른 가격이 나와야 한다
+			(e.g. 17시 이후 부터는 야간권 가격으로 계산되어야 함)
+		</li>
+	</ul>
+	
+	<form action="./answerT" method="POST">
+		<table border="1">
+			<tr>
+				<th>종류</th>
+				<th>주간권(1일권)</th>
+				<th>야간권(17시~), 1, 2월: 16시~</th>
+				<th>구매 수량</th>
+				<th>주간/야간</th>
+			</tr>
+			<tr>
+				<th>대인</th>
+				<td>54000원</td>
+				<td>45000원</td>
+				<td><input style="width: 80px;" type="number" name="adult-ticket-qty" /></td>
+				<td>
+					<select name="adult-ticket-type" id="">
+						<option value="day">주간</option>
+						<option value="night">야간</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>청소년</th>
+				<td>46000원</td>
+				<td>39000원</td>
+				<td><input style="width: 80px;" type="number" name="youth-ticket-qty" /></td>
+				<td>
+					<select name="youth-ticket-type" id="">
+						<option value="day">주간</option>
+						<option value="night">야간</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>소인/경로</th>
+				<td>43000원</td>
+				<td>36000원</td>
+				<td><input style="width: 80px;" type="number" name="child-ticket-qty" /></td>
+				<td>
+					<select name="child-ticket-type" id="">
+						<option value="day">주간</option>
+						<option value="night">야간</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+	
+		<input type="submit" value="구매하기" />
+		<input type="reset" value="다시설정하기" />
+	
+	</form>
+</body>
+</html>
