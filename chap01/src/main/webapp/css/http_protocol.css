@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+#url-ex {
+	border: solid 1px black;
+	padding: 10px;
+	word-spacing: -3px;
+}
+
+#protocol {
+	border: solid 1px orange;
+}
+
+#ip-add {
+	border: solid 1px green;
+}
+
+#prot {
+	border: solid 1px purple;
+}
+
+#uri {
+	border: solid 1px blue;	
+}
