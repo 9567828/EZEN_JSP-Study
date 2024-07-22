@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+#gugudan {
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+}
+
+.dan {
+	font-weight: bold;
+}
