@@ -16,9 +16,9 @@ public class EverlandServlet extends HttpServlet {
 	private static HashMap<String, HashMap<String, Integer>> priceMap = new HashMap<>();
 	
 	static {
-		priceMap.put("adult", new HashMap<>());
-		priceMap.put("youth", new HashMap<>());
-		priceMap.put("child", new HashMap<>());
+		priceMap.put("adult", new HashMap<String, Integer>());
+		priceMap.put("youth", new HashMap<String, Integer>());
+		priceMap.put("child", new HashMap<String, Integer>());
 		
 		priceMap.get("adult").put("day", 54000);
 		priceMap.get("adult").put("night", 45000);
