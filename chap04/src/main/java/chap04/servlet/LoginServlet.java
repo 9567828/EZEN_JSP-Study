@@ -14,7 +14,7 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
-		String cmd = uri.substring("/chap04/login".length());
+		String cmd = uri.substring("/chap04/login/".length());
 		
 		System.out.println("ip addr: " + req.getRemoteAddr());
 		System.out.println("URL: " + req.getRequestURL());

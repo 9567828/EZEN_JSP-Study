@@ -9,8 +9,8 @@
 <body>
 	<h3># 세션에 들어있는 값에 따라 달라지는 페이지</h3>
 	
-	<button onclick="location.href='/chap04/login/success';">로그인 성공시키기</button>
-	<button onclick="location.href='/chap04/login/close';">세션 만료시키기(새로운 세션ID 발급)</button>
+	<button onclick="location.href='/chap04/login2/success';">로그인 성공시키기</button>
+	<button onclick="location.href='/chap04/login2/close';">세션 만료시키기(새로운 세션ID 발급)</button>
 	
 	<hr>
 	
@@ -24,7 +24,7 @@
 	
 	<% if (user != null) { %>
 		<p><b>'<%=user %>'</b>님 환영합니다!
-		<button onclick="location.href='/chap04/login/logout';">로그아웃하기</button></p>
+		<button onclick="location.href='/chap04/login2/logout';">로그아웃하기</button></p>
 	<% } else { %>
 		<p>아직 로그인하지 않으셨습니다.</p>
 	<% } %>

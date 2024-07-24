@@ -7,14 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/login/*")
+@WebServlet("/login2/*")
 public class LoginServlet2 extends HttpServlet {
 	
 	@Override
 	protected void service(HttpServletRequest req,
 			HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
-		String cmd = uri.substring("/chap04/login/".length());
+		String cmd = uri.substring("/chap04/login2/".length());
 		
 		
 		System.out.println("ip addr: " + req.getRemoteAddr());
@@ -30,7 +30,7 @@ public class LoginServlet2 extends HttpServlet {
 			// 해당 세션ID에 만료시간 설정하기 (초)
 			session.setMaxInactiveInterval(10);
 			
-			resp.sendRedirect("/chap04/login/result");
+			resp.sendRedirect("/chap04/login2/result");
 		} else if (cmd.equals("result")) {
 			req.getRequestDispatcher("/session/session_ex.jsp").forward(req, resp);
 		} else if (cmd.equals("logout")) {
@@ -39,13 +39,13 @@ public class LoginServlet2 extends HttpServlet {
 			
 			session.setMaxInactiveInterval(1800); // 세션 만료시간 없애기
 			
-			resp.sendRedirect("/chap04/login/result");
+			resp.sendRedirect("/chap04/login2/result");
 			
 		} else if (cmd.equals("close")) {
 			session.invalidate(); // 세션 만료시키기
 			
 			// 세션 만료 후 리다이렉트시 바로 새로운 세션ID를 발급받게 된다
-			resp.sendRedirect("/chap04/login/result");
+			resp.sendRedirect("/chap04/login2/result");
 			
 		}
 	}
