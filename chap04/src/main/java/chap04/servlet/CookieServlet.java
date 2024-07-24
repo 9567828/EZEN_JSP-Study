@@ -55,6 +55,84 @@ public class CookieServlet extends HttpServlet {
 			resp.addCookie(cookie2);
 			resp.addCookie(cookie3);
 			resp.sendRedirect("/chap04/cookie/cookie_index.jsp");			
+		} else if (cmd.equals("delete")) {
+			// 이미 존재하는 쿠키를 삭제할 때는 요청에 실려있는 쿠키의 
+			// 수명을 0으로 수정한 후에 응답에 실어보내주면 된다
+			// 하나씩 꺼내주는 메서드가 없어서 for문을 써야 한다.
+			Cookie[] cookies = req.getCookies();
+			
+			// 쿠키가 null이 아닐 때 for문 돌아라
+			if (cookies != null) {
+				String to_delete = req.getParameter("cookie-name");
+				System.out.println("내가 지워야 하는 쿠키이름: " + to_delete);
+				for (Cookie cookie : cookies) {
+					if (cookie.getName().equals(to_delete)) {
+						// 해당 이름의 쿠키를 수명 0으로 만들고 응답에 실어 삭제 
+						cookie.setMaxAge(0);
+						// 삭제를 제대로 하기 위해서 경로를 설정해줘야 한다.
+						// cookie는 네임과 벨류만 주고 받기 때문에 쿠키를 정확하게 설정해주어야 한다.
+						cookie.setPath("/chap04/cookie");
+						resp.addCookie(cookie);
+						break;
+					}
+				}				
+			}
+			// 이 서블릿의 list 커맨드로 다시 요청 해주세요 라고 응답 (리다이렉트 원리)
+			resp.sendRedirect("/chap04/cookie/ex/list");
+		} else if (cmd.equals("modify")) {
+			String to_modi = req.getParameter("to_modi");
+			String modi_value = req.getParameter("modi_value");
+			
+			System.out.println("바꿔야 하는 쿠키이름: " + to_modi);
+			System.out.println("바꾸고 싶은 값: " + modi_value);
+			
+			// 쿠키 값을 수정하고 싶으면 해당 쿠키를 꺼내서 값을 바꾼 후 응답에 다시 실어놓으면 된다
+			Cookie[] cookies = req.getCookies();
+			
+			if(cookies != null) {
+				for (Cookie cookie : cookies) {
+					if (cookie.getName().equals(to_modi)) {
+						cookie.setValue(modi_value);
+						cookie.setPath("/chap04/cookie");
+						resp.addCookie(cookie);
+						break;
+					}
+				}
+			}
+			
+			// 수정이 끝나면 다시 목록으로 돌아가라
+			resp.sendRedirect("/chap04/cookie/ex/list");
+			
+			// modify는 풀이, 나는 edit으로 함 아래.
+//			Cookie[] cookies = req.getCookies();
+//			String to_editValue = req.getParameter("edit-cookie-value");
+//			String cookieValue = req.getParameter("cookie-value");
+//			
+//			int len = to_editValue.length();
+//			char ch = 0;
+//			
+//			for (int i = 0; i < len; ++i) {
+//				ch = to_editValue.charAt(i);
+//				if (to_editValue.isEmpty() && ch == ' ') {
+//					break;
+//				}
+//			}
+//			
+//			
+//			if(cookies != null && !to_editValue.isEmpty()) {
+//				System.out.println("수정할 벨류: " + cookieValue);
+//				System.out.println("수정될 이름: " + to_editValue);
+//				
+//				for (Cookie cookie : cookies) {				
+//					if (cookie.getValue().equals(cookieValue)) {
+//						cookie.setValue(to_editValue);
+//						cookie.setPath("/chap04/cookie");
+//						resp.addCookie(cookie);
+//						break;
+//					}
+//				}				
+//			}
+//			resp.sendRedirect("/chap04/cookie/ex/list");
 		} else {
 			// URI가 원하는 cmd가 아닐 때 그냥 메인으로 redirect를 걸어준다.
 			resp.sendRedirect("/chap04/cookie/cookie_index.jsp");
