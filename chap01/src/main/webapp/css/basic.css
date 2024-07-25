@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: large;
+	color: blue;
+}
