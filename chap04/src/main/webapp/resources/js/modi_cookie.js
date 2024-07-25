@@ -6,7 +6,7 @@ Array.from(modiForms).forEach((modiForm) => {
 	//form.elements 에서 name 속성 또는 id 속성으로 폼 내부 요소 선택 가능
 	const modiValue = modiForm.elements.modi_value;
 	const modiBint = modiForm.elements.modi_btn;
-	
+
 	modiBint.addEventListener("click", (e) => {
 		e.preventDefault();
 		
