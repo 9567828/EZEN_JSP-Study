@@ -34,7 +34,7 @@ public class ForwardServlet extends HttpServlet {
 		URI_MAPPING.put("GET:/emp/list", new EmpListProcess());
 		URI_MAPPING.put("GET:/emp/detail", new EmpDetailProcess());
 		URI_MAPPING.put("GET:/emp/delete", new EmpDeleteProcess());
-//		URI_MAPPING.put("GET:/emp/update", new EmpUpdateProcess());
+		URI_MAPPING.put("GET:/emp/update", new EmpUpdateProcess());
 		
 	}
 	

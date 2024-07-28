@@ -5,11 +5,12 @@
 <% 
 	Employee emp = (Employee) request.getAttribute("emp");
 	List<String[]> jobs = (List<String[]>) request.getAttribute("jobs");
+	List<String[]> depts = (List<String[]>) request.getAttribute("depts");
 	
 	String full_name = emp.getFirst_name() + " " + emp.getLast_name();
 	
-	
 	int emp_id = emp.getEmployee_id();
+ 
 	int next_id = emp_id + 1;
 	int prev_id = emp_id - 1;
 	
@@ -32,7 +33,7 @@
 		월급 : <%=emp.getSalary() %> <br>	
 	</div>
 	<div id="update_wrap" style="display: none;">
-		<form action="">
+		<form action="./update" method="GET">
 		<!-- readonly 수정불가능 -->
 			사원번호 : <input type="number" name="emp_id" id="" value="<%=emp.getEmployee_id() %>" readonly /> <br>
 			이름 : <input type="text" name="first_name" id="" value="<%=emp.getFirst_name() %>" /> <br />
@@ -47,7 +48,13 @@
 			<br />
 			월급 : <input type="text" name="salary" id="" value="<%=emp.getSalary() %>" /> <br />
 			커미션 : <input type="text" name="commission" id="" value="<%=emp.getCommission_pct() %>" /> <br />
-			부서번호 : <input type="text" name="dep_id" id="" value="<%=emp.getDepartment_id() %>" /> <br />
+			부서번호 :
+			<select name="department_id" id="">
+				<% for (String[] dep : depts) { %>
+					<option value="<%=dep[0]%>"><%=dep[1] %>(<%=dep[0] %>)</option>
+				<% } %>
+			</select>
+			<br />
 			<input type="submit" value="완료" />
 		</form>
 	</div>
@@ -81,7 +88,7 @@
 		
 		nextBtn?.addEventListener("click", (e) => {
 			console.log(nextBtn);
-			location.href = "./detail?employee_id=<%=next_id%>";
+			location.href = "./detail?employee_id=<%=next_id%>"
 		});
 		
 		const backToListBtn = document.getElementById("backToListBtn");

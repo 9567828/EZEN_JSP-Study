@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,16 +17,26 @@ public class EmpUpdateProcess implements WebProcess {
 	public String process(HttpServletRequest request, HttpServletResponse response) {
 		Ojdbcconnection ojdbc = (Ojdbcconnection) request.getServletContext().getAttribute("ojdbc");
 		
-		String sql = "SELECT * FROM employees2 WHERE employee_id = ?";
-		String sql2 = "SELECT job_id, job_title FROM jobs";
+		String sql = "UPDATE employees2 SET "
+				+ "first_name = ? "
+				+ "last_name = ? "
+				+ "job_id = ? "
+				+ "salary = ? "
+				+ "commission_pct = ? "
+				+ "department_id = ? "
+				+ " WHERE employee_id = ?";
 		
 		try (
 			Connection conn = ojdbc.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 		) {
-			pstmt.setInt(1, Integer.parseInt(request.getParameter("employee_id")));
-			
+			pstmt.setString(1, request.getParameter("first_name"));
+			pstmt.setString(2, request.getParameter("last_name"));
+			pstmt.setString(3, request.getParameter("job_id"));
+			pstmt.setDouble(4, Double.parseDouble(request.getParameter("salary")));
+			pstmt.setDouble(5, Double.parseDouble(request.getParameter("commission")));
+			pstmt.setInt(6, Integer.parseInt(request.getParameter("department_id")));
+			pstmt.setInt(7, Integer.parseInt(request.getParameter("emp_id")));			
 			try (
 				ResultSet rs = pstmt.executeQuery();
 			) {
@@ -42,13 +50,6 @@ public class EmpUpdateProcess implements WebProcess {
 						rs.getDouble("commission_pct"),
 						rs.getInt("department_id")
 						));
-			}
-			try (ResultSet rs = pstmt2.executeQuery()) {
-				List<String[]> jobs = new ArrayList<>();
-				while(rs.next()) {
-					jobs.add(new String[] {rs.getString("job_id"), rs.getString("job_title")});
-				}
-				request.setAttribute("jobs", jobs);
 			}
 			
 		} catch (SQLException e) {
