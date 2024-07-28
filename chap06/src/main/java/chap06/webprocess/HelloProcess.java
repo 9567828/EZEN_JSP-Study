@@ -11,7 +11,7 @@ public class HelloProcess implements WebProcess {
 	public String process(HttpServletRequest request, HttpServletResponse response) {
 		// 처리하고 싶은 내용 처리하고 다음으로 가야하는 JSP 페이지의 경로를 리턴
 		request.setAttribute("userName", "주형돈");
-		return "WEB-INF/views/hello.jsp";
+		return "/hello";
 	}
 
 }
