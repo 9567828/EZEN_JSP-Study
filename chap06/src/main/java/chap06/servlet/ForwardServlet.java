@@ -16,6 +16,10 @@ import chap06.webprocess.EmpDetailProcess;
 import chap06.webprocess.EmpListProcess;
 import chap06.webprocess.EmpUpdateProcess;
 import chap06.webprocess.HelloProcess;
+import chap06.webprocess.JoinProcess;
+import chap06.webprocess.MemListProcess;
+import chap06.webprocess.MypageProcess;
+import chap06.webprocess.loginProcess;
 
 public class ForwardServlet extends HttpServlet {
 	
@@ -35,6 +39,10 @@ public class ForwardServlet extends HttpServlet {
 		URI_MAPPING.put("GET:/emp/detail", new EmpDetailProcess());
 		URI_MAPPING.put("GET:/emp/delete", new EmpDeleteProcess());
 		URI_MAPPING.put("GET:/emp/update", new EmpUpdateProcess());
+		URI_MAPPING.put("GET:/member/join", new JoinProcess());
+		URI_MAPPING.put("GET:/member/login", new loginProcess());
+		URI_MAPPING.put("GET:/member/memList", new MemListProcess());
+		URI_MAPPING.put("GET:/member/mypage", new MypageProcess());
 		
 	}
 	
@@ -48,12 +56,15 @@ public class ForwardServlet extends HttpServlet {
 		System.out.println("만들어내는키 - " + method + ":" + uri);
 		
 		// 요청방식과 URI에 따라 알맞은 처리를 여기서(서블릿) 진행한다
-		// 처리를 진행한 후에는 다음에 어떤 JSp로 포워드 해야할지를 알아야 한다
+		// 처리를 진행한 후에는 다음에 어떤 JSP로 포워드 해야할지를 알아야 한다
 		WebProcess wp = URI_MAPPING.get(method + ":" + uri);
+		
+		System.out.println("웹프로세스: " + wp);
 		
 		String nextView = null;
 		if (wp != null) {
 			nextView = wp.process(req, resp);
+			System.out.println("nextview: " + nextView);
 		} else {
 			resp.sendRedirect(req.getContextPath() + "/hello");
 			// service 함수를 끝내줘야 하기 때문에 return을 걸어준다
