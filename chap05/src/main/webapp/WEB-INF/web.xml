@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>chap05</display-name>
+  <!-- XML: 데이터를 효율적으로 보관하기 위한 문자열 저장구조 HTML과 같은 마크업 언어에 속한다 -->
+  <!-- 데이터를 XML형태로 만들어두면 다른 어어로 만들어진 프로그램에서도 그 데이터를 활용할 수 있다 (일종의 공용어 역할을 한다) -->
+  
+  <!-- web.xml: 톰캣 서버의 여러 설정들을 XML형식으로 보관해두고 읽어서 사용하는 설정 파일 -->
+  
+  <!-- # @WebServlet 대신에 web.xml에서 URL 매핑하기 -->
+  
+  <!-- 
+	  	(1) 매핑할 서블릿(.java) 또는 JSP파일(.jsp) 등록하기
+	  	<servlet-name> : 내가 쓰고싶은 이름
+	  	<servlet-class> : 실제 서블릿의 위치 
+	  	<jsp-file>: 해당 JSP파일의 위치
+  -->
+  <servlet>
+  	<servlet-name>MyServ</servlet-name>
+  	<servlet-class>chap05.servlet.MyServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>myJsp1</servlet-name>
+  	<jsp-file>/myPage1.jsp</jsp-file>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>myJsp2</servlet-name>
+  	<jsp-file>/WEB-INF/views/myPage2.jsp</jsp-file>
+  </servlet>
+  
+  <!-- 
+  		(2) 등록한 서블릿에 매핑할 URL을 설정하기
+  		
+  		<servlet-name>: 등록한 서블릿의 이름
+  		<url-pattern>: 해당 서블릿에 매핑하고 싶은 주소
+   -->
+   <servlet-mapping>
+     	<servlet-name>MyServ</servlet-name>
+     	<url-pattern>/myServlet</url-pattern>
+   </servlet-mapping>
+   
+   <servlet-mapping>
+   	<servlet-name>myJsp1</servlet-name>
+   	<url-pattern>/user/mypage/detail</url-pattern>
+   </servlet-mapping>
+  
+   <servlet-mapping>
+   	<servlet-name>myJsp2</servlet-name>
+   	<url-pattern>/user/mypage/profile</url-pattern>
+   </servlet-mapping>
+   
+   <!-- 
+   		# 초기화 파라미터 (Init Parameter) 설정하기
+   		
+   		- 해당 서블릿에서 사용할 변수들을 web.xml에서 등록해 줄 수 있다
+   		- 소스코드에 포함시키고 싶지 않은 내용들을 web.xml에서 등록하여 소스코드와 설정파일을 분리할 수 있다
+   		- 초기화 파라미터는 웹 서버 실행 시 서블릿들을 초기화 하며 로드된다
+   		- 해당 서블릿 내부에서만 사용할 지역 초기화 파라미터는 <init-param>으로 등록한다
+   		- 모든 서블릿에서 사용할 전역 초기화 파라미터는 <context-param>으로 등록한다
+    -->
+    
+    <servlet>
+    	<servlet-name>initTest</servlet-name>
+    	<servlet-class>chap05.servlet.InitTestServlet</servlet-class>
+    	<init-param>
+    		<param-name>db_account</param-name>
+    		<param-value>hr</param-value>
+    	</init-param>
+    	<init-param>
+    		<param-name>db_password</param-name>
+    		<param-value>1234</param-value>
+    	</init-param>
+    </servlet>
+    
+    <servlet-mapping>
+    	<servlet-name>initTest</servlet-name>
+    	<url-pattern>/init/param/test</url-pattern>
+    </servlet-mapping>
+  
+  	<context-param>
+  		<param-name>puppy_img</param-name>
+  		<param-value>/assets/images/puppy.jpg</param-value>
+  	</context-param>
+  	
+  	<!-- 
+  		 # 특이한 url-pattern들
+  		 
+  		 * : 모든 요청
+  		 /path/* : 해당 경로 이후의 모든 요청
+  		 *.hello : 확장자가 .hello인 모든 요청
+  		 / : 매핑에 걸리지 않은 모든 요청 (else 역할) ※
+  	 -->
+  	 
+ 	 <servlet-mapping>
+  	 	<servlet-name>MyServ</servlet-name>
+  	 	<url-pattern>/abc/test/*</url-pattern>
+  	 </servlet-mapping>
+
+  	 <servlet-mapping>
+  	 	<servlet-name>MyServ</servlet-name>
+  	 	<url-pattern>*.profile</url-pattern>
+  	 </servlet-mapping>
+
+  	 <servlet>
+  	 	<servlet-name>elseServlet</servlet-name>
+  	 	<servlet-class>chap05.servlet.ElseServlet</servlet-class>
+  	 </servlet>
+  	 
+  	 <servlet-mapping>
+  	 	<servlet-name>elseServlet</servlet-name>
+  	 	<url-pattern>/</url-pattern>
+  	 </servlet-mapping>
+  
+</web-app>
