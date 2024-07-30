@@ -4,7 +4,6 @@
     
 <% 
 	JoinProcess checkId = new JoinProcess();
-	boolean result = checkId.isExist;
 %>
 
 <!DOCTYPE html>
@@ -17,11 +16,11 @@
 <body>
 	<h3>회원가입</h3>
 
-	<form action="./join" id="join_form" method="GET">
-		아이디 : <input type="text" name="join_id" id="join_id" /> <br />
-		이메일 : <input type="email" name="join_email" id="join_email" placeholder="abc@naver.com" /> <br />
-		비밀번호 : <input type="password" name="join_pw" id="join_pw" /> <br />
-		비밀번호확인 : <input type="password" name="join_pw_check" id="join_pw_check" /> <br />
+	<form action="./join" id="join_form" method="POST">
+		아이디 : <input type="text" name="account_id" id="join_id" /> <br />
+		이메일 : <input type="email" name="account_email" id="join_email" placeholder="abc@naver.com" /> <br />
+		비밀번호 : <input type="password" name="account_pw" id="join_pw" /> <br />
+		비밀번호확인 : <input type="password" name="account_pw_chk" id="join_pw_check" /> <br />
 		<input type="hidden" name="member_status" value="신규" />
 		<hr />
 		약관에 동의 하시겠습니까? <br />
@@ -49,12 +48,6 @@
 				joinId.focus();
 				return;
 			}	
-			
-			<% if (result) { %>
-				alert("이미 있는 아이디 입니다. 다시 입력해주세요")
-				joinId.value = "";
-				return;
-			<% } %>
 			
 			if (joinEmail.value == "" || vaildText.test(joinEmail.value) == false) {
 				alert("이메일이 공란 혹은 형식이 올바르지 않습니다")

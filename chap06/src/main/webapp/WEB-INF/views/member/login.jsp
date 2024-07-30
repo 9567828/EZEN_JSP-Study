@@ -9,7 +9,7 @@
 <body>
 	<h3>로그인</h3>
 	<hr />
-	<form action="" method="GET">
+	<form action="" method="POST">
 		아이디: <input type="text" name="login_id" id="" /> <br />
 	 	비밀번호: <input type="text" name="login_pw" id="" /> <br />
 		<input type="submit" value="로그인" />
