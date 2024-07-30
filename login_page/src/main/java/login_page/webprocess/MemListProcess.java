@@ -34,11 +34,11 @@ public class MemListProcess implements WebProcess {
 						rs.getString("account_id"),
 						rs.getString("account_email"),
 						rs.getString("account_pw"),
-						rs.getDate("join_date"),
+						rs.getString("join_date"),
 						rs.getString("member_status"),
 						rs.getString("terms_agree").charAt(0),
 						rs.getString("social_login"),
-						rs.getDate("change_pw_date")
+						rs.getString("change_pw_date")
 						);
 					memList.add(mem);
 			}

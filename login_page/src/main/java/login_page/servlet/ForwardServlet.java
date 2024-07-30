@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import login_page.dao.Ojdbcconnection;
 import login_page.web.WebProcess;
 import login_page.webprocess.JoinFormProcess;
 import login_page.webprocess.JoinProcess;
@@ -25,7 +26,7 @@ public class ForwardServlet extends HttpServlet {
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		config.getServletContext().setAttribute("ojdbc", config);
+		config.getServletContext().setAttribute("ojdbc", new Ojdbcconnection(config.getInitParameter("jdbcUrl"), config.getInitParameter("user"), config.getInitParameter("pw")));
 		
 		URI_MAPPING.put("GET:/member/join", new JoinFormProcess());
 		URI_MAPPING.put("POST:/member/join", new JoinProcess());
@@ -49,7 +50,7 @@ public class ForwardServlet extends HttpServlet {
 		if (wp != null) {
 			nextView = wp.process(req, resp);
 		} else {
-			resp.sendRedirect(req.getContextPath() + "/");
+			resp.sendRedirect(req.getContextPath() + "/login");
 			return;
 		}
 		

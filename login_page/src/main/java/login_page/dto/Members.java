@@ -2,6 +2,7 @@ package login_page.dto;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,28 +17,46 @@ public class Members {
 	String social_login;
 	Date change_pw_date;
 	
-	public Members(String account_id, String account_email, String account_pw, Date join_date, String member_status, Character terms_agree, String social_login, Date change_pw_date) {
+	SimpleDateFormat dateForm = new SimpleDateFormat("yyyy-MM-dd");
+	String joinDate = dateForm.format(join_date);
+	String changeDate = dateForm.format(change_pw_date);
+	
+	public Members(String account_id, String account_email, String account_pw, String joinDate, String member_status, Character terms_agree, String social_login, String changeDate) {
 		this.account_id = account_id;
 		this.account_email = account_email;
 		this.account_pw = account_pw;
-		this.join_date = join_date;
+		this.joinDate = joinDate;
 		this.member_status = member_status;
 		this.terms_agree = terms_agree;
 		this.social_login = social_login;
-		this.change_pw_date = change_pw_date;
+		this.changeDate = changeDate;
 	}
 	
 	public Members(ResultSet rs) throws SQLException {
+		
 		this (
 			rs.getString("account_id"),
 			rs.getString("account_email"),
 			rs.getString("account_pw"),
-			rs.getDate("join_date"),
+			rs.getString("join_date"),
 			rs.getString("member_status"),
 			rs.getString("terms_agree").charAt(0),
 			rs.getString("social_login"),
-			rs.getDate("change_pw_date")
+			rs.getString("change_pw_date")
 			
+		);
+	}
+	
+	public Members(HttpServletRequest req) {
+		this (
+			req.getParameter("account_id"),
+			req.getParameter("account_email"),
+			req.getParameter("account_pw"),
+			req.getParameter("join_date"),
+			req.getParameter("member_status"),
+			req.getParameter("terms_agree").charAt(0),
+			req.getParameter("social_login"),
+			req.getParameter("change_pw_date_form")
 		);
 	}
 

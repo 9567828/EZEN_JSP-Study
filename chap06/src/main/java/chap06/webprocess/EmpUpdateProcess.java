@@ -22,12 +22,11 @@ public class EmpUpdateProcess implements WebProcess {
 		// DB에 update
 		Ojdbcconnection ojdbc = (Ojdbcconnection) request.getServletContext().getAttribute("ojdbc");
 		
-		String sql = "UPDATE employees2 SET "
-				+ "first_name = ? "
-				+ "last_name = ? "
-				+ "job_id = ? "
-				+ "salary = ? "
-				+ "commission_pct = ? "
+		String sql = "UPDATE employees2 SET first_name = ?, "
+				+ "last_name = ?, "
+				+ "job_id = ?, "
+				+ "salary = ?, "
+				+ "commission_pct = ?, "
 				+ "department_id = ? "
 				+ " WHERE employee_id = ?";
 		
