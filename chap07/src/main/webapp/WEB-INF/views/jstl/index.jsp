@@ -27,6 +27,7 @@
 		<li>&lt;c:if&gt; : if문을 편리하게 사용할 수 있는 태그</li>
 		<li>import한 prefix에 들어간 문자대로 넣는다는 것</li>
 		 <li>&lt;c:choose&gt; : if, else if, else 문을 사용할 수 있는 태그</li>
+		 <li>&lt;c:forEach&gt;</li>
 	</ul>
 	
 	<h3># 어트리뷰트에 추가된 값은 사실 편리하게 꺼내 쓸 수 있는 방법이 있다</h3>
@@ -96,6 +97,49 @@
 			<p>F등급 입니다</p>
 		</c:otherwise>
 	</c:choose>
+	
+	<h3># c:forEach로 반복문 돌려보기</h3>
+	
+	<ul>
+		<li>var : 하나씩 꺼내서 반복 돌릴 값</li>
+		<li>
+			items : 하나씩 꺼낼 수 있는 열거형 (enum, iterable한 객체) 객체 <br />
+			e.g. 배열, 리스트, Set등등
+		</li>
+		<c:forEach var="animal" items="${animals}">
+			<li id="${animal}">${animal}</li>
+		</c:forEach>
+	</ul>
+	
+	<h3># c:forEach로 숫자를 만들어서 반복 돌리기</h3>
+	
+	<ul>
+		<li>begin: 시작하는 숫자</li>
+		<li>end: 끝나는 숫자</li>
+		<li>step: 증가하는 숫자</li>
+		<li>"for int i = 0; i < 9; ++i"와 같다</li>
+		<li>
+			<c:forEach var="i" begin="0" end="9" step="1">
+				${i },
+			</c:forEach>		
+		</li>
+		<li>
+			<c:forEach var="i" begin="0" end="20" step="2">
+				${i },
+			</c:forEach>		
+		</li>
+		<c:forEach var="i" begin="0" end="9" step="1">
+			<li id="list-item${i }">${i }번째 반복</li>
+		</c:forEach>		
+	</ul>
+	
+	<h3># 반복문 자체의 상태를 볼 수 있는 varStatus</h3>
+	
+	<ul>
+		<c:forEach var="f" items="${fruits}" varStatus="status">
+			<div>${f}(${status.index}번째 아이템, ${status.count}회 반복중)</div>
+		</c:forEach>
+	</ul>
 
 </body>
 </html>
