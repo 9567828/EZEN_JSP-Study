@@ -36,13 +36,21 @@
 			<a href="${to_memlist}">회원정보목록</a> <br />
 		</c:if>
 		<br />
-		회원탈퇴하기 <button>탈퇴</button>
+		회원탈퇴하기 <button id="leaveBtn">탈퇴</button>
 		
 	<% } else { %>
 		<p>로그인 하지 않으셨습니다.</p>
 		로그인 하시겠습니까? <button onclick="location.href='./login'">로그인</button> <br />
 		회원이 아니신가요? <button onclick="location.href='./join';">회원가입하기</button>
 	<% } %>
+	
+	<script>
+		const leaveBtn = document.getElementById("leaveBtn");
+		
+		
+	
+	
+	</script>
 
 </body>
 </html>
