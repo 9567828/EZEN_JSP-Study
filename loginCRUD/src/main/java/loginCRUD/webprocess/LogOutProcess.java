@@ -14,6 +14,7 @@ public class LogOutProcess implements WebProcess {
 		
 		session.removeAttribute("userId");
 		session.removeAttribute("managerId");
+		session.invalidate();
 		
 		return "redirect:/member/login";
 	}

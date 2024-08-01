@@ -49,20 +49,7 @@ public class Members {
 			rs.getString("access_manager").charAt(0)
 		);
 	}
-	
-//	public Members(HttpServletRequest req) throws ParseException {
-//	    this(
-//	        req.getParameter("account_id"),
-//	        req.getParameter("account_email"),
-//	        req.getParameter("account_pw"),
-//	        dateForm.parse(req.getParameter(joinDateStr)),
-//	        req.getParameter("member_status"),
-//	        req.getParameter("terms_agree").charAt(0),
-//	        req.getParameter("social_login"),
-//	        dateForm.parse(req.getParameter(changeDateStr))
-//		);
-//	}
-	
+
 	public int getRownum() {
 		return rownum;
 	}

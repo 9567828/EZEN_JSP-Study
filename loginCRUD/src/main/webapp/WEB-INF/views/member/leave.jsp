@@ -7,7 +7,8 @@
 <title>탈퇴페이지</title>
 </head>
 <body>
-	<p>탈퇴 페이지 입니다.</p>
+	<h3>탈퇴 되었습니다.</h3>
+	<button onclick="location.href='./login'">로그인으로</button>
 
 </body>
 </html>

@@ -47,7 +47,12 @@
 	<script>
 		const leaveBtn = document.getElementById("leaveBtn");
 		
-		
+		leaveBtn.addEventListener("click", (e) => {
+			if (confirm("정말로 탈퇴 하시겠습니까?")) {
+				location.href = "./leave"
+			}
+			
+		})
 	
 	
 	</script>

@@ -18,6 +18,7 @@ import loginCRUD.webprocess.CheckPwProcess;
 import loginCRUD.webprocess.ErrorProcess;
 import loginCRUD.webprocess.JoinFormProcess;
 import loginCRUD.webprocess.JoinProcess;
+import loginCRUD.webprocess.LeaveProcess;
 import loginCRUD.webprocess.LogOutProcess;
 import loginCRUD.webprocess.LoginFormProcess;
 import loginCRUD.webprocess.LoginProcess;
@@ -55,6 +56,7 @@ public class ForwardServlet extends HttpServlet {
 		URI_MAPPING.put("GET:/member/changePassword", new ChangePwFormProcess());
 		URI_MAPPING.put("POST:/member/changePassword", new ChangePwProcess());
 		URI_MAPPING.put("GET:/member/logout", new LogOutProcess());
+		URI_MAPPING.put("GET:/member/leave", new LeaveProcess());
 	}
 	
 	@Override
