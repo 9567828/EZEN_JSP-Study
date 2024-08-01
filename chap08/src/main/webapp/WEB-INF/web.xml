@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>chap08</display-name>
+  
+  <servlet>
+  	<servlet-name>home</servlet-name>
+  	<servlet-class>chap08.servlet.HomeServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>home</servlet-name>
+  	<url-pattern>/home</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 필터도 서블릿과 마찬가지로 등록후 url 매핑을 해두면 된다 -->
+  <filter>
+  	<filter-name>myfilter1</filter-name>
+  	<filter-class>chap08.filter.MyFilter1</filter-class>
+  </filter>
+  
+  <!-- /home으로 들어오는 페이지들은 myfilter1을 거치도록 한다 -->
+  <filter-mapping>
+  	<filter-name>myfilter1</filter-name>
+  	<url-pattern>/home</url-pattern>
+  </filter-mapping>
+  
+  
+</web-app>
