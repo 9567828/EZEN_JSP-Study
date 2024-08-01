@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>chap06</display-name>
+
+	<servlet>
+		<servlet-name>forwardServlet</servlet-name>
+		<servlet-class>chap06.servlet.ForwardServlet</servlet-class>
+		<init-param>
+			<param-name>jdbcUrl</param-name>
+			<param-value>jdbc:oracle:thin:@localhost:1521:XE</param-value>
+		</init-param>
+		<init-param>
+			<param-name>user</param-name>
+			<param-value>hr</param-value>
+		</init-param>
+		<init-param>
+			<param-name>pw</param-name>
+			<param-value>1234</param-value>
+		</init-param>
+	</servlet>
+	
+	<!-- 모든 요청을 forwardServlet으로 보내주는 것 -->
+	<servlet-mapping>
+		<servlet-name>forwardServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- servlet-name을 default로 설정한 매핑은 원래대로 동작한다 -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/favicon.ico</url-pattern>
+	</servlet-mapping>
+
+</web-app>
