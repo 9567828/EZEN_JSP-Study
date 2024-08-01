@@ -18,9 +18,11 @@ import loginCRUD.webprocess.CheckPwProcess;
 import loginCRUD.webprocess.ErrorProcess;
 import loginCRUD.webprocess.JoinFormProcess;
 import loginCRUD.webprocess.JoinProcess;
+import loginCRUD.webprocess.LogOutProcess;
 import loginCRUD.webprocess.LoginFormProcess;
 import loginCRUD.webprocess.LoginProcess;
 import loginCRUD.webprocess.MemListProcess;
+import loginCRUD.webprocess.MemListUpdateProcess;
 import loginCRUD.webprocess.MyPageProcess;
 import loginCRUD.webprocess.SuccessProcess;
 
@@ -47,10 +49,12 @@ public class ForwardServlet extends HttpServlet {
 		URI_MAPPING.put("POST:/member/login", new LoginProcess());
 		URI_MAPPING.put("GET:/member/myPage", new MyPageProcess());
 		URI_MAPPING.put("GET:/member/memList", new MemListProcess());
+		URI_MAPPING.put("GET:/member/memList", new MemListUpdateProcess());
 		URI_MAPPING.put("GET:/member/checkPassword", new CheckPwFormProcess());
 		URI_MAPPING.put("POST:/member/checkPassword", new CheckPwProcess());
 		URI_MAPPING.put("GET:/member/changePassword", new ChangePwFormProcess());
 		URI_MAPPING.put("POST:/member/changePassword", new ChangePwProcess());
+		URI_MAPPING.put("GET:/member/logout", new LogOutProcess());
 	}
 	
 	@Override
@@ -72,7 +76,7 @@ public class ForwardServlet extends HttpServlet {
 		if (wp != null) {
 			nextView = wp.process(req, resp);
 		} else {
-			resp.sendRedirect(req.getContextPath() + "/hello");
+			resp.sendRedirect(req.getContextPath() + "/error");
 			return;
 		}
 		

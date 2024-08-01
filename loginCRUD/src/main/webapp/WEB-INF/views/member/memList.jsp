@@ -42,6 +42,22 @@
 
 </head>
 <body>
+
+	<% 
+		String manager = null;
+		if (session.getAttribute("managerId") != null) {
+			manager = (String)session.getAttribute("managerId");
+		}
+	%>
+	
+	<% if (manager != null) { %>
+	
+	<div class="manager_wrap">
+		<p>관리자 계정 입니다.</p>
+		<button onclick="location.href='./myPage?account_id=<%=manager%>'">내정보</button>
+		<button onclick="location.href='./logout'">로그아웃</button>
+	</div>
+	
 	<h3>가입자 리스트</h3>
 		
 	<ul>
@@ -78,6 +94,12 @@
 		}else {
 		System.out.println("회원 목록이 비었다");
 	 } %>
+	 
+	 	<% } else { %>
+		<p>로그인 하지 않으셨습니다.</p>
+		로그인 하시겠습니까? <button onclick="location.href='./login'">로그인</button> <br />
+		회원이 아니신가요? <button onclick="location.href='./join';">회원가입하기</button>
+	<% } %>
 	
 </body>
 </html>

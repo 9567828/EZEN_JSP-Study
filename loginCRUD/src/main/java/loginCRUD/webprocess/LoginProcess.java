@@ -46,7 +46,7 @@ public class LoginProcess implements WebProcess {
                         if ("Y".equalsIgnoreCase(accessManager)) {
                             System.out.println("관리자 로그인 성공: " + userId);
                             session.setAttribute("managerId", userId);
-                            return "redirect:/member/memList";
+                            return "redirect:/member/memList?account_id=" + userId;
                         } else {
                             System.out.println("일반 사용자 로그인 성공: " + userId);
                             return "redirect:/member/myPage?account_id=" + userId;

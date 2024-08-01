@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import chap07.web.WebProcess;
+import chap07.webprocess.ELSampleProcess;
 import chap07.webprocess.JstlIndexProcess;
+import chap07.webprocess.NotfoundProcess;
 
 public class DispatcherServlet extends HttpServlet {
 	
@@ -21,14 +23,18 @@ public class DispatcherServlet extends HttpServlet {
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		URI_MAPPING.put(
-				String.format("GET:%s/jstl", config.getServletContext().getContextPath()), new JstlIndexProcess());
+		URI_MAPPING.put("GET:/jstl", new JstlIndexProcess());
+		// el = ExpressionLanguage 약자
+		URI_MAPPING.put("GET:/jstl/el", new ELSampleProcess());
+		URI_MAPPING.put("GET:/notfound", new NotfoundProcess());
 	}
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String contextPath = req.getContextPath();
+		
 		String method = req.getMethod();
-		String uri = req.getRequestURI();
+		String uri = req.getRequestURI().substring(contextPath.length());
 		
 		System.out.println("요청방식: " + method);
 		System.out.println("요청URI: " + uri);
@@ -40,7 +46,8 @@ public class DispatcherServlet extends HttpServlet {
 		if (wp != null) {
 			nextView = wp.process(req, resp);
 		} else {
-			resp.sendRedirect(req.getContextPath() + "/hello");
+			// 없는 페이지를 넣어두면 계속 리다이렉트를 시도한다
+			resp.sendRedirect(req.getContextPath() + "/notfound");
 			return;
 		}
 		

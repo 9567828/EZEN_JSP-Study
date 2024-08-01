@@ -15,7 +15,7 @@ import loginCRUD.dao.DBconnection;
 import loginCRUD.dto.Members;
 import loginCRUD.web.WebProcess;
 
-public class MemListProcess implements WebProcess {
+public class MemListUpdateProcess implements WebProcess {
 	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
@@ -23,36 +23,31 @@ public class MemListProcess implements WebProcess {
 		
 		HttpSession session = request.getSession();
 		String managerId = (String) session.getAttribute("managerId");
+		String userId = (String) session.getAttribute("userId");
 		
 		 if (managerId == null) {
             // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
             return "redirect:/member/login";
         }
 
-		String selectSql = "SELECT rownum, accounts.* FROM (SELECT * FROM accounts ORDER BY join_date asc) accounts";
+		String sql = "UPDATE accounts SET member_status = ?, access_manager = ? WHERE account_id = ?";
 		
 		try (
 			Connection conn = db.getConnection();
-			PreparedStatement selectPstmt = conn.prepareStatement(selectSql);
+			PreparedStatement pstmt = conn.prepareStatement(sql);
 		) {
-			try (ResultSet rs = selectPstmt.executeQuery();) {
-				List<Members> memList = new ArrayList<>();
-				while(rs.next()) {
-					Members mem = new Members(
-							rs.getInt("rownum"),
-							rs.getString("account_id"),
-							rs.getString("account_email"),
-							rs.getString("account_pw"),
-							rs.getDate("join_date"),
-							rs.getString("member_status"),
-							rs.getString("terms_agree").charAt(0),
-							rs.getString("social_login"),
-							rs.getDate("change_pw_date"),
-							rs.getString("access_manager").charAt(0)
-							);
-					memList.add(mem);
-				}
-				request.setAttribute("memList", memList);
+			pstmt.setString(1, request.getParameter("member_status"));
+			pstmt.setString(2, request.getParameter("access_manager"));
+			pstmt.setString(3, userId);
+			
+			int result = pstmt.executeUpdate();
+			
+			if (result > 0) {
+				System.out.println("수정성공");
+				return "./memList";
+			} else {
+				System.out.println("수정 실패");
+				request.setAttribute("failedM", "수정이 실패했습니다.");
 			}
 			
 		} catch (SQLException e) {
