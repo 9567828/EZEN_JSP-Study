@@ -34,26 +34,25 @@ public class MemListProcess implements WebProcess {
 		try (
 			Connection conn = db.getConnection();
 			PreparedStatement selectPstmt = conn.prepareStatement(selectSql);
+			ResultSet rs = selectPstmt.executeQuery();
 		) {
-			try (ResultSet rs = selectPstmt.executeQuery();) {
-				List<Members> memList = new ArrayList<>();
-				while(rs.next()) {
-					Members mem = new Members(
-							rs.getInt("rownum"),
-							rs.getString("account_id"),
-							rs.getString("account_email"),
-							rs.getString("account_pw"),
-							rs.getDate("join_date"),
-							rs.getString("member_status"),
-							rs.getString("terms_agree").charAt(0),
-							rs.getString("social_login"),
-							rs.getDate("change_pw_date"),
-							rs.getString("access_manager").charAt(0)
-							);
-					memList.add(mem);
-				}
-				request.setAttribute("memList", memList);
+			List<Members> memList = new ArrayList<>();
+			while(rs.next()) {
+				Members mem = new Members(
+						rs.getInt("rownum"),
+						rs.getString("account_id"),
+						rs.getString("account_email"),
+						rs.getString("account_pw"),
+						rs.getDate("join_date"),
+						rs.getString("member_status"),
+						rs.getString("terms_agree").charAt(0),
+						rs.getString("social_login"),
+						rs.getDate("change_pw_date"),
+						rs.getString("access_manager").charAt(0)
+						);
+				memList.add(mem);
 			}
+			request.setAttribute("memList", memList);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -23,7 +23,6 @@ import loginCRUD.webprocess.LogOutProcess;
 import loginCRUD.webprocess.LoginFormProcess;
 import loginCRUD.webprocess.LoginProcess;
 import loginCRUD.webprocess.MemListProcess;
-import loginCRUD.webprocess.MemListUpdateProcess;
 import loginCRUD.webprocess.MyPageProcess;
 import loginCRUD.webprocess.SuccessProcess;
 
@@ -50,7 +49,6 @@ public class ForwardServlet extends HttpServlet {
 		URI_MAPPING.put("POST:/member/login", new LoginProcess());
 		URI_MAPPING.put("GET:/member/myPage", new MyPageProcess());
 		URI_MAPPING.put("GET:/member/memList", new MemListProcess());
-		URI_MAPPING.put("GET:/member/memList", new MemListUpdateProcess());
 		URI_MAPPING.put("GET:/member/checkPassword", new CheckPwFormProcess());
 		URI_MAPPING.put("POST:/member/checkPassword", new CheckPwProcess());
 		URI_MAPPING.put("GET:/member/changePassword", new ChangePwFormProcess());

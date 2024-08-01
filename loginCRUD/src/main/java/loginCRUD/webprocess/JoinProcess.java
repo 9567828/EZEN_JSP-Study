@@ -50,7 +50,8 @@ public class JoinProcess implements WebProcess {
 			int result = pstmt2.executeUpdate();
 			
 			if (result > 0) {
-				session.setAttribute("successJoin", "가입 완료 되었습니다~~~!~!");
+				request.setAttribute("successJoin", "가입 완료 되었습니다~~~!~!");
+				session.setAttribute("joinId", inputJoinId);
 				return "redirect:/success";
 			} else {
 				request.setAttribute("faild_join", "가입에 실패하였습니다.");
