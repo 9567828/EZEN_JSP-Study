@@ -1,0 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<c:set var="animal" value="코끼리" scope="page" />
+<c:set var="coffeeList" value="아메리카노/에스프레소/카페라떼/카페모카/자바칩프라프치노" scope="page" />
