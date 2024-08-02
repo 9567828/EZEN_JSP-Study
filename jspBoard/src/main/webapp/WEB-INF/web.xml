@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>jspBoard</display-name>
+  <servlet>
+  	<servlet-name>appServlet</servlet-name>
+  	<servlet-class>jspBoard.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  
+    <servlet-mapping>
+  	<servlet-name>default</servlet-name>
+  	<url-pattern>/resources/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>appServlet</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+  <context-param>
+  	<param-name>driverName</param-name>
+  	<param-value>oracle.jdbc.driver.OracleDriver</param-value>
+  </context-param>
+
+  <context-param>
+  	<param-name>jdbcUrl</param-name>
+  	<param-value>jdbc:oracle:thin:@localhost:1521:XE</param-value>
+  </context-param>
+
+  <context-param>
+  	<param-name>userName</param-name>
+  	<param-value>hr</param-value>
+  </context-param>
+
+  <context-param>
+  	<param-name>password</param-name>
+  	<param-value>1234</param-value>
+  </context-param>
+  
+  <!-- 여기는 initparam 못넣음 -->
+  <listener>
+  	<listener-class>jspBoard.listener.ContextLoaderlistener</listener-class>
+  </listener>
+  
+</web-app>
