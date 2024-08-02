@@ -1,0 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>    
+<table border=1>
+	<tr>
+		<th>커피이름</th>
+	</tr>	
+	<c:forTokens var="coffee" items="${coffeeList}" delims="/">
+		<tr>
+			<td>${coffee}</td>
+		</tr>
+	</c:forTokens>
+</table>
