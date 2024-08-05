@@ -1,6 +1,10 @@
 package jspBoard.dto;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class JspBoard {
 	int board_id;
@@ -13,6 +17,9 @@ public class JspBoard {
 	int board_view_count;
 	int board_good_count;
 	int board_bad_count;
+	
+	public JspBoard() {
+	}
 	
 	public JspBoard(int board_id, String board_title, String board_writer, String board_password,
 			String board_writer_ip_addr, String board_content, Date board_write_date, int board_view_count,
@@ -28,6 +35,29 @@ public class JspBoard {
 		this.board_view_count = board_view_count;
 		this.board_good_count = board_good_count;
 		this.board_bad_count = board_bad_count;
+	}
+	
+	public JspBoard(ResultSet rs) throws SQLException {
+		this.board_id = rs.getInt("board_id");
+		this.board_title = rs.getString("board_title");
+		this.board_writer = rs.getString("board_writer");
+		this.board_password = rs.getString("board_password");
+		this.board_writer_ip_addr = rs.getString("board_writer_ip_addr");
+		this.board_content = rs.getString("board_content");
+		this.board_write_date = rs.getDate("board_write_date");
+		this.board_view_count = rs.getInt("board_view_count");
+		this.board_good_count = rs.getInt("board_good_count");
+		this.board_bad_count = rs.getInt("board_bad_count");
+	}
+	
+	public JspBoard setWrite(HttpServletRequest request) {
+		board_title = request.getParameter("board_title");
+		board_writer = request.getParameter("board_writer");
+		board_password = request.getParameter("board_password");
+		board_writer_ip_addr = "127.0.0.1"; //request.getRemoteAddr();
+		board_content = request.getParameter("board_content");
+		
+		return this;
 	}
 
 	public int getBoard_id() {

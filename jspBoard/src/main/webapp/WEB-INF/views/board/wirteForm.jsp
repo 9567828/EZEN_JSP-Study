@@ -18,6 +18,7 @@
 		글내용: <textarea name="board_content" id="" cols="30" rows="10"></textarea> <br />
 		<input type="submit" value="글쓰기" />
 	</form>
+	<button onclick="location.href='/board/'">목록보기</button>
 	
 </body>
 </html>

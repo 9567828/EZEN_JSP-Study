@@ -6,8 +6,8 @@
   	<servlet-class>jspBoard.servlet.DispatcherServlet</servlet-class>
   </servlet>
   
-    <servlet-mapping>
-  	<servlet-name>default</servlet-name>
+   <servlet-mapping>
+ 	<servlet-name>default</servlet-name>
   	<url-pattern>/resources/*</url-pattern>
   </servlet-mapping>
   
@@ -40,5 +40,16 @@
   <listener>
   	<listener-class>jspBoard.listener.ContextLoaderlistener</listener-class>
   </listener>
+  
+  <!-- 모든 경로에 있는 것 들을 인코딩해준다 -->
+  <filter>
+	<filter-name>encodingFilter</filter-name>
+	<filter-class>jspBoard.filter.CharacterEncodingFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>encodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
   
 </web-app>

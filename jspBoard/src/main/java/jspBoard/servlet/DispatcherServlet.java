@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jspBoard.web.WebProcess;
+import jspBoard.webprocess.BoardDetailProcess;
+import jspBoard.webprocess.BoardEvalProcess;
 import jspBoard.webprocess.BoardIndexProcess;
 import jspBoard.webprocess.BoardWriteFormProcess;
 import jspBoard.webprocess.BoardWriteProcess;
@@ -28,6 +30,8 @@ public class DispatcherServlet extends HttpServlet {
 		URI_MAPPING.put("GET:/board/", new BoardIndexProcess());
 		URI_MAPPING.put("GET:/board/write", new BoardWriteFormProcess());
 		URI_MAPPING.put("POST:/board/write", new BoardWriteProcess());
+		URI_MAPPING.put("GET:/board/detail", new BoardDetailProcess());
+		URI_MAPPING.put("GET:/board/eval", new BoardEvalProcess());
 		
 	}
 	
